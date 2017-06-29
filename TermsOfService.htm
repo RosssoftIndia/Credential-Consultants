@@ -1,0 +1,604 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<base target="_top">
+<style type="text/css">
+  
+
+/* default css */
+
+table {
+  font-size: 1em;
+  line-height: inherit;
+  border-collapse: collapse;
+}
+
+
+tr {
+  
+  text-align: left;
+  
+}
+
+
+div, address, ol, ul, li, option, select {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+p {
+  margin: 0px;
+}
+
+
+pre {
+  font-family: Courier New;
+  white-space: pre-wrap;
+  margin:0;
+}
+
+body {
+  margin: 6px;
+  padding: 0px;
+  font-family: Verdana, sans-serif;
+  font-size: 10pt;
+  background-color: #ffffff;
+  color: #000;
+}
+
+
+img {
+  -moz-force-broken-image-icon: 1;
+}
+
+@media screen {
+  html.pageview {
+    background-color: #f3f3f3 !important;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  
+
+  body {
+    min-height: 1100px;
+    
+    counter-reset: __goog_page__;
+  }
+  
+  * html body {
+    height: 1100px;
+  }
+  /* Prevent repaint errors when scrolling in Safari. This "Star-7" css hack
+     targets Safari 3.1, but not WebKit nightlies and presumably Safari 4.
+     That's OK because this bug is fixed in WebKit nightlies/Safari 4 :-). */
+  html*#wys_frame::before {
+    content: '\A0';
+    position: fixed;
+    overflow: hidden;
+    width: 0;
+    height: 0;
+    top: 0;
+    left: 0;
+  }
+  
+  .pageview body {
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 2px solid #bbb;
+    border-bottom: 2px solid #bbb;
+    width: 648px !important;
+    margin: 15px auto 25px;
+    padding: 40px 50px;
+  }
+  /* IE6 */
+  * html {
+    overflow-y: scroll;
+  }
+  * html.pageview body {
+    overflow-x: auto;
+  }
+  
+
+  
+    
+    .writely-callout-data {
+      display: inline-block;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+    
+
+    .writely-footnote-marker {
+      background-image: url('MISSING');
+      background-color: transparent;
+      background-repeat: no-repeat;
+      width: 7px;
+      overflow: hidden;
+      height: 16px;
+      vertical-align: top;
+
+      
+      -moz-user-select: none;
+    }
+    .editor .writely-footnote-marker {
+      cursor: move;
+    }
+    .writely-footnote-marker-highlight {
+      background-position: -15px 0;
+      -moz-user-select: text;
+    }
+    .writely-footnote-hide-selection ::-moz-selection, .writely-footnote-hide-selection::-moz-selection {
+      background: transparent;
+    }
+    .writely-footnote-hide-selection ::selection, .writely-footnote-hide-selection::selection {
+      background: transparent;
+    }
+    .writely-footnote-hide-selection {
+      cursor: move;
+    }
+
+    /* Comments */
+    .writely-comment-yellow {
+      background-color: #ffffd7;
+    }
+    .writely-comment-orange {
+      background-color: #ffe3c0;
+    }
+    .writely-comment-pink {
+      background-color: #ffd7ff;
+    }
+    .writely-comment-green {
+      background-color: #d7ffd7;
+    }
+    .writely-comment-blue {
+      background-color: #d7ffff;
+    }
+    .writely-comment-purple {
+      background-color: #eed7ff;
+    }
+
+  
+
+
+  
+  .br_fix span+br:not(:-moz-last-node) {
+    
+    position:relative;
+    
+    left: -1ex
+    
+  }
+
+  
+  #cb-p-tgt {
+    font-size: 8pt;
+    padding: .4em;
+    background-color: #ddd;
+    color: #333;
+  }
+  #cb-p-tgt-can {
+    text-decoration: underline;
+    color: #36c;
+    font-weight: bold;
+    margin-left: 2em;
+  }
+  #cb-p-tgt .spin {
+    width: 16px;
+    height: 16px;
+    background: url(//ssl.gstatic.com/docs/clipboard/spin_16o.gif) no-repeat;
+  }
+}
+
+h6 { font-size: 8pt }
+h5 { font-size: 8pt }
+h4 { font-size: 10pt }
+h3 { font-size: 12pt }
+h2 { font-size: 14pt }
+h1 { font-size: 18pt }
+
+blockquote {padding: 10px; border: 1px #DDD dashed }
+
+.webkit-indent-blockquote { border: none; }
+
+a img {border: 0}
+
+.pb {
+  border-width: 0;
+  page-break-after: always;
+  /* We don't want this to be resizeable, so enforce a width and height
+     using !important */
+  height: 1px !important;
+  width: 100% !important;
+}
+
+.editor .pb {
+  border-top: 1px dashed #C0C0C0;
+  border-bottom: 1px dashed #C0C0C0;
+}
+
+div.google_header, div.google_footer {
+  position: relative;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+
+/* Table of contents */
+.editor div.writely-toc {
+  background-color: #f3f3f3;
+  border: 1px solid #ccc;
+}
+.writely-toc > ol {
+  padding-left: 3em;
+  font-weight: bold;
+}
+ol.writely-toc-subheading {
+  padding-left: 1em;
+  font-weight: normal;
+}
+/* IE6 only */
+* html writely-toc ol {
+  list-style-position: inside;
+}
+.writely-toc-none {
+  list-style-type: none;
+}
+.writely-toc-decimal {
+  list-style-type: decimal;
+}
+.writely-toc-upper-alpha {
+  list-style-type: upper-alpha;
+}
+.writely-toc-lower-alpha {
+  list-style-type: lower-alpha;
+}
+.writely-toc-upper-roman {
+  list-style-type: upper-roman;
+}
+.writely-toc-lower-roman {
+  list-style-type: lower-roman;
+}
+.writely-toc-disc {
+  list-style-type: disc;
+}
+
+/* Ordered lists converted to numbered lists can preserve ordered types, and
+   vice versa. This is confusing, so disallow it */
+ul[type="i"], ul[type="I"], ul[type="1"], ul[type="a"], ul[type="A"] {
+  list-style-type: disc;
+}
+
+ol[type="disc"], ol[type="circle"], ol[type="square"] {
+  list-style-type: decimal;
+}
+
+/* end default css */
+
+
+  /* default print css */
+  @media print {
+    body {
+      padding: 0;
+      margin: 0;
+    }
+
+    div.google_header, div.google_footer {
+      display: block;
+      min-height: 0;
+      border: none;
+    }
+
+    div.google_header {
+      flow: static(header);
+    }
+
+    /* used to insert page numbers */
+    div.google_header::before, div.google_footer::before {
+      position: absolute;
+      top: 0;
+    }
+
+    div.google_footer {
+      flow: static(footer);
+    }
+
+    /* always consider this element at the start of the doc */
+    div#google_footer {
+      flow: static(footer, start);
+    }
+
+    span.google_pagenumber {
+      content: counter(page);
+    }
+
+    span.google_pagecount {
+      content: counter(pages);
+    }
+
+    .endnotes {
+      page: endnote;
+    }
+
+    /* MLA specifies that endnotes title should be 1" margin from the top of the page. */
+    @page endnote {
+      margin-top: 1in;
+    }
+
+    callout.google_footnote {
+      
+      display: prince-footnote;
+      footnote-style-position: inside;
+      /* These styles keep the footnote from taking on the style of the text
+         surrounding the footnote marker. They can be overridden in the
+         document CSS. */
+      color: #000;
+      font-family: Times New Roman;
+      font-size: 12.0pt;
+      font-weight: normal;
+    }
+
+    /* Table of contents */
+    #WritelyTableOfContents a::after {
+      content: leader('.') target-counter(attr(href), page);
+    }
+
+    #WritelyTableOfContents a {
+      text-decoration: none;
+      color: black;
+    }
+
+    /* Comments */
+    .writely-comment-yellow {
+      background-color: #ffffd7;
+    }
+    .writely-comment-orange {
+      background-color: #ffe3c0;
+    }
+    .writely-comment-pink {
+      background-color: #ffd7ff;
+    }
+    .writely-comment-green {
+      background-color: #d7ffd7;
+    }
+    .writely-comment-blue {
+      background-color: #d7ffff;
+    }
+    .writely-comment-purple {
+      background-color: #eed7ff;
+    }
+  }
+
+  @page {
+    @top {
+      content: flow(header);
+    }
+    @bottom {
+      content: flow(footer);
+    }
+    @footnotes {
+      border-top: solid black thin;
+      padding-top: 8pt;
+    }
+  }
+  /* end default print css */
+
+
+/* custom css */
+
+
+/* end custom css */
+
+/* ui edited css */
+
+body {
+  font-family: Times New Roman;
+  
+  font-size: 12.0pt;
+  line-height: normal;
+  background-color: #ffffff;
+}
+/* end ui edited css */
+
+
+/* editor CSS */
+.editor a:visited {color: #551A8B}
+.editor table.zeroBorder {border: 1px dotted gray}
+.editor table.zeroBorder td {border: 1px dotted gray}
+.editor table.zeroBorder th {border: 1px dotted gray}
+
+
+.editor div.google_header, .editor div.google_footer {
+  border: 2px #DDDDDD dashed;
+  position: static;
+  width: 100%;
+  min-height: 2em;
+}
+
+.editor .misspell {background-color: yellow}
+
+.editor .writely-comment {
+  font-size: 9pt;
+  line-height: 1.4;
+  padding: 1px;
+  border: 1px dashed #C0C0C0
+}
+
+
+/* end editor CSS */
+
+</style>
+
+  
+  <title>Credential Connection Terms of Service 2.22.10</title>
+            <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20673314-1']);
+  _gaq.push(['_setDomainName', '.credentialconnection.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>  
+</head>
+
+<body 
+    
+    >
+    
+    
+    
+<div>
+  <p style=MARGIN:0pt>
+    <span style="FONT-FAMILY:'Times New Roman'"><font size=2>TERMS OF SERVICE</font></span>
+  </p>
+  <p style=MARGIN:0pt>
+    <span style="FONT-FAMILY:'Times New Roman'"><font size=2>Please read these terms of service very carefully before registering for the Credential Connection's web site and Service.&nbsp; These terms of service (“Agreement”) govern you accessing and using the Service.&nbsp; This Agreement between you (“you”) and Credential Connection is subject to change by us as described below.&nbsp; By cclicking on the checkbox button to the left, you (i) accept this Agreement; (ii) agree to be bound by these Terms of Service; and (iii) have entered into a binding agreement between you and Credential Connection. </font></span>
+  </p>
+  <p style=MARGIN:0pt>
+    <span style="FONT-FAMILY:'Times New Roman'"><font size=2>&nbsp;</font></span>
+  </p>
+  <p style="MARGIN:0pt 0pt 0pt 18pt">
+    <span style="FONT-FAMILY:'Times New Roman'"><font size=2>.</font></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="FONT-FAMILY:'Times New Roman'"><font size=2>This web site (“Site”) is owned and operated by Credential Consultants, Inc. and Credential Connection(referred to as “Credential Connection” herein).&nbsp; The Site and its content (“Content”) and the Credential Connection's software service (“Service”) may only be accessed in accordance with this Agreement.&nbsp; Any violation of the copyright in the Content or these Terms of Service may be enforced by Credential Connection or the copyright owner to the fullest extent allowed by law.&nbsp; </font></span>
+  </p>
+  <p style=MARGIN:0pt>
+    <span style="FONT-FAMILY:'Times New Roman'"><font size=2>&nbsp;</font></span>
+  </p>
+  <p style="MARGIN:0pt 0pt 0pt 18pt">
+    <span style="FONT-FAMILY:'Times New Roman'"><font size=2>.</font></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="FONT-FAMILY:'Times New Roman'"><font size=2>You acknowledge and agree that Credential Connection may stop (permanently or temporarily) providing the Services (or any features within the Services) to you or to users generally at Credential Connection's sole discretion, without prior notice to you. You may stop using the Services at any time. </font></span>
+  </p>
+  <p style=MARGIN:0pt>
+    <span style="FONT-FAMILY:'Times New Roman'"><font size=2>&nbsp;</font></span>
+  </p>
+  <p style="MARGIN:0pt 0pt 0pt 18pt">
+    <span style="FONT-FAMILY:'Times New Roman'"><font size=2>.</font></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="FONT-FAMILY:'Times New Roman'"><font size=2>You agree not to access (or attempt to access) any of the Services by any means other than through the interface that is provided by Credential Connection, unless you have been specifically allowed to do so in a separate agreement with Credential Connection.&nbsp; You agree that you will not engage in any activity that interferes with or disrupts the Services (or the servers and networks which are connected to the Services).&nbsp; Unless you have been specifically permitted to do so in a separate agreement with Credential Connection, you agree that you will not reproduce, duplicate, copy, sell, trade or resell the Services for any purpose.&nbsp; You agree that you are solely responsible for (and that Credential Connection has no responsibility to you or to any third party for) any breach of your obligations under this Agreement and for the consequences (including any loss or damage which Credential Connection may suffer) of any such breach.</font></span>
+  </p>
+  <p style=MARGIN:0pt>
+    <span style="FONT-FAMILY:'Times New Roman'"><font size=2>&nbsp;</font></span>
+  </p>
+  <p style="MARGIN:0pt 0pt 0pt 18pt">
+    <span style="FONT-FAMILY:'Times New Roman'"><font size=2>.</font></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="FONT-FAMILY:'Times New Roman'"><font size=2>Credential Connection reserves all rights not specifically granted herein.&nbsp; You shall not modify any copyright notices, proprietary legends, any trademark and service mark attributions, any patent markings, and other indicia of ownership on the Content or other materials accessed through the Service.&nbsp; </font></span><span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>Any use of Content, or descriptions; any derivative use of this Site or its materials; and any use of data mining, robots, or similar data gathering and extraction tools is strictly prohibited.&nbsp; In no event shall the user frame any portion of the Site or any materials contained therein. </font></span>
+  </p>
+  <p style=MARGIN:0pt>
+    <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>&nbsp;</font></span>
+  </p>
+  <p style="MARGIN:0pt 0pt 0pt 18pt">
+    <span style="FONT-FAMILY:'Times New Roman'"><font size=2>.</font></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>While Credential Connection uses reasonable efforts to include accurate and up-to-date information on the Site, Credential Connection makes no warranties or representations as to its accuracy. Credential Connection assumes no liability or responsibility for any errors or representations in the Content or this Site.</font></span>
+  </p>
+  <p style=MARGIN:0pt>
+    <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>&nbsp;</font></span>
+  </p>
+  <p style="MARGIN:0pt 0pt 0pt 18pt">
+    <span style="FONT-FAMILY:'Times New Roman'"><font size=2>.</font></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>The Site may contain links to other sites on the Internet which are owned and operated by Third Party Vendors and other third parties (the “External Sites”). You acknowledge that Credential Connection is not responsible for the availability of, or the materials located on or through, any External Sites. You should contact the site administrator or webmaster for those External Sites if you have any concerns regarding such links or the materials located on such External Sites.</font></span>
+  </p>
+  <p style=MARGIN:0pt>
+    <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>&nbsp;</font></span>
+  </p>
+  <p style="MARGIN:0pt 0pt 0pt 18pt">
+    <span style="FONT-FAMILY:'Times New Roman'"><font size=2>.</font></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2> The user agrees to not impersonate any person or communicate under a false name or a name the user is not entitled or authorized to use.&nbsp; Credential Connection has the right (but not the obligation) to remove, prohibit, edit or discontinue any content on the Site.&nbsp;&nbsp; </font></span>
+  </p>
+  <p style=MARGIN:0pt>
+    <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>&nbsp;</font></span>
+  </p>
+  <p style="MARGIN:0pt 0pt 0pt 18pt">
+    <span style="FONT-FAMILY:'Times New Roman'"><font size=2>.</font></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>If you post content or submit non personally identifiable information (including data such as University names, locations, degrees, etc.) Credential Connection shall own such content and information and you hereby assign any rights in such content and material to Credential Connection.&nbsp; In the event ownership in the content or information cannot be granted to Credential Consultants, you grant Credential Connection and its affiliates a perpetual, irrevocable, worldwide, royalty-free, non-exclusive, sublicensable right and license to make, use, sell, sublicense, reproduce, distribute, perform, display, prepare derivative works from and otherwise exploit all such content and information as if it were the full owner thereof.&nbsp; </font></span>
+  </p>
+  <p style=MARGIN:0pt>
+    <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>&nbsp;</font></span>
+  </p>
+  <p style="MARGIN:0pt 0pt 0pt 18pt">
+    <span style="FONT-FAMILY:'Times New Roman'"><font size=2>.</font></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>At your discretion, you may provide feedback to Credential Connection concerning the functionality and performance of the Service from time to time, including, without limitation, identifying potential errors, improvements, modifications, bug fixes, or enhancements (“Feedback”).&nbsp; If you, through your evaluation or otherwise, suggests any Feedback, you hereby assign the ownership in all Feedback to Credential Connection.&nbsp; In the event ownership in the Feedback cannot be granted to Credential Connection, you grant Credential Connection at no charge a perpetual, irrevocable, royalty-free, worldwide right and license to use, reproduce, disclose, sublicense, distribute, modify, and otherwise exploit such Feedback without restriction.&nbsp; You agree that Credential Connection may disclose that Feedback to any third party in any manner and you agree that Credential Connection has the ability to sublicense all Feedback in any form to any third party without restriction.</font></span>
+  </p>
+  <p style=MARGIN:0pt>
+    <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>&nbsp;</font></span>
+  </p>
+  <p style="MARGIN:0pt 0pt 0pt 18pt">
+    <span style="FONT-FAMILY:'Times New Roman'"><font size=2>.</font></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>The Site may contain areas in which additional terms and conditions apply.&nbsp; For purposes of the use of such areas, in the event of a conflict between the Terms of Service of such other areas and these Terms of Service, the terms and conditions of the other area shall prevail.&nbsp; Credential Connection may at any time revise these Terms of Service by updating this posting.&nbsp; You are bound by any such revisions and should therefore periodically visit this page to review the current Terms of Service to which you are bound.</font></span>
+  </p>
+  <p style=MARGIN:0pt>
+    <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>&nbsp;</font></span>
+  </p>
+  <p style="MARGIN:0pt 0pt 0pt 18pt">
+    <span style="FONT-FAMILY:'Times New Roman'"><font size=2>.</font></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>You shall not transmit to Credential Connection or upload to this Site any Harmful Code or use or misappropriate the data on this Site for your own commercial gain. “Harmful Code” shall mean any software (sometimes referred to as “viruses,” “worms,” “trojan horses,” “time bombs,” “time locks,” “drop dead devices,” “traps,” “access codes,” “cancelbots” or “trap door devices”) that: (a) is intentionally designed to damage, disrupt, disable, harm, impair, interfere with, intercept, expropriate or otherwise impede in any manner, any data, storage media, program, system, equipment or communication, based on any event, including for example but not limited to (i) exceeding a number of copies, (ii) exceeding a number of users, (iii) passage of a period of time, (iv) advancement to a particular date or other numeral, or (v) use of a certain feature; or (b) would enable an unauthorized person to cause such result; or (c) would enable an unauthorized person to access another person’s information without such other person’s knowledge and permission.</font></span>
+  </p>
+  <p style=MARGIN:0pt>
+    <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>&nbsp;</font></span>
+  </p>
+  <p style="MARGIN:0pt 0pt 0pt 18pt">
+    <span style="FONT-FAMILY:'Times New Roman'"><font size=2>.</font></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>You may not use your username and password for any unauthorized purpose.&nbsp; Furthermore, you may not share your username or password with others.</font></span>
+  </p>
+  <p style=MARGIN:0pt>
+    <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>&nbsp;</font></span>
+  </p>
+  <p style="MARGIN:0pt 0pt 0pt 18pt">
+    <span style="FONT-FAMILY:'Times New Roman'"><font size=2>.</font></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>Credential Connection may retain and use, information collected in your use of the Service and information submitted by you, provided such information does not individually identify you.</font></span>
+  </p>
+  <p style=MARGIN:0pt>
+    <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>&nbsp;</font></span>
+  </p>
+  <p style="MARGIN:0pt 0pt 0pt 18pt">
+    <span style="FONT-FAMILY:'Times New Roman'"><font size=2>.</font></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>Credential Connection may terminate your access to our Site or the Service for any reason at any time.</font></span>
+  </p>
+  <p style=MARGIN:0pt>
+    <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>&nbsp;</font></span>
+  </p>
+  <p style="MARGIN:0pt 0pt 0pt 18pt">
+    <span style="FONT-FAMILY:'Times New Roman'"><font size=2>.</font></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>By using this Site, you signify your assent to these terms of use and agree to comply with all applicable laws and regulations, including U.S. export and re-export control laws and regulations, copyright laws and other laws regarding intellectual property.&nbsp; If you do not agree to these terms of use, please do not use the Site.&nbsp; THIS AGREEMENT SHALL BE GOVERNED AND INTERPRETED BY THE INTERNAL LAWS OF THE STATE OF TEXAS WITHOUT REGARD TO THE CONFLICTS OF LAW PROVISIONS THEREOF.&nbsp; ANY ACTION OR SUIT RELATED TO THIS AGREEMENT SHALL BE BROUGHT IN HOUSTON, TEXAS.</font></span>
+  </p>
+  <p style=MARGIN:0pt>
+    <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>&nbsp;</font></span>
+  </p>
+  <p style="MARGIN:0pt 0pt 0pt 18pt">
+    <span style="FONT-FAMILY:'Times New Roman'"><font size=2>.</font></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>The materials on this Site are provided with “Restricted Rights.” Use, duplication, or disclosure by the Government is subject to restrictions as set forth in applicable laws and regulations. Use of the materials by the Government constitutes acknowledgment of Credential Connection's proprietary rights in them.</font></span>
+  </p>
+  <p style=MARGIN:0pt>
+    <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>&nbsp;</font></span>
+  </p>
+  <p style="MARGIN:0pt 0pt 0pt 18pt">
+    <span style="FONT-FAMILY:'Times New Roman'"><font size=2>.</font></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>THE MATERIALS, CONTENT ON THIS SITE AND SERVICES ARE PROVIDED “AS IS”, “AS AVAILABLE” WITHOUT WARRANTIES OF ANY KIND EITHER EXPRESS OR IMPLIED.&nbsp; CREDENTIAL CONNECTION SHALL HAVE NO RESPONSIBILITY OR LIABILITY FOR ANY CONTENT, MATERIALS POSTED ON THE SITE OR SERVICES.&nbsp; CREDENTIAL CONNECTION MAKES NO GUARANTEES AS TO UPTIME OR AVAILABILITY OF THE SERVICE.&nbsp; TO THE FULLEST EXTENT POSSIBLE PURSUANT TO THE APPLICABLE LAW, CREDENTIAL CONNECTION DISCLAIMS ALL WARRANTIES, EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NONINFRINGEMENT OR OTHER VIOLATION OF RIGHTS.&nbsp; THE SERVICE MAY BE SUBJECT TO LIMITATIONS, DELAYS, AND OTHER PROBLEMS INHERENT IN THE USE OF THE INTERNET AND ELECTRONIC COMMUNICATIONS.&nbsp; CREDENTIAL CONNECTION IS NOT RESPONSIBLE FOR ANY DELAYS, DELIVERY FAILURES, OR OTHER DAMAGE RESULTING FROM SUCH PROBLEMS, INCLUDING INTERNET CONGESTION, VIRUS ATTACKS, AND DENIAL OF SERVICE (DOS) ATTACKS.</font></span>
+  </p>
+  <p style=MARGIN:0pt>
+    <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>&nbsp;</font></span>
+  </p>
+  <p style="MARGIN:0pt 0pt 0pt 18pt">
+    <span style="FONT-FAMILY:'Times New Roman'"><font size=2>.</font></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>UNDER NO CIRCUMSTANCES, INCLUDING, BUT NOT LIMITED TO, NEGLIGENCE, SHALL CREDENTIAL CONNECTION OR ITS THIRD PARTY LICENSORS BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES, INCLUDING, BUT NOT LIMITED TO, LOSS OF DATA OR PROFIT, ARISING OUT OF THE USE, OR THE INABILITY TO USE, THE MATERIALS ON THIS SITE OR THE SERVICE, EVEN IF CREDENTIAL CONNECTION HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES AND NOTWITHSTANDING THE FAILURE OF ESSENTIAL PURPOSE OF ANY REMEDY. CREDENTIAL CONNECTION' AND ITS LICENSORS’ ENTIRE AND AGGREGATE LIABILITY, WHETHER BASED IN CONTRACT, TORT (INCLUDING NEGLIGENCE), STRICT LIABILITY OR OTHERWISE, SHALL NOT EXCEED $10, EVEN IF CREDENTIAL CONNECTION HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES AND NOTWITHSTANDING THE FAILURE OF ESSENTIAL PURPOSE OF ANY REMEDY.&nbsp; IF YOUR USE OF MATERIALS FROM THIS SITE OR THE SERVICE RESULTS IN THE NEED FOR SERVICING, REPAIR OR CORRECTION OF EQUIPMENT OR DATA, YOU ASSUME ANY COSTS THEREOF. SOME STATES DO NOT ALLOW THE EXCLUSION OR LIMITATION OF INCIDENTAL OR CONSEQUENTIAL DAMAGES, SO THE ABOVE LIMITATION OR EXCLUSION MAY NOT APPLY TO YOU.</font></span>
+  </p>
+  <p style=MARGIN:0pt>
+    <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>&nbsp;</font></span>
+  </p>
+  <p style="MARGIN:0pt 0pt 0pt 18pt">
+    <span style="FONT-FAMILY:'Times New Roman'"><font size=2>.</font></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>This Agreement shall constitute the entire agreement between the parties regarding the subject matter hereof and supersede all proposals and prior discussions and writings between the parties with respect thereto.&nbsp; No failure or delay in enforcing any right or exercising any remedy will be deemed a waiver of any right or remedy.&nbsp; Each provision of this Agreement is a separately enforceable provision.&nbsp; If any provision of this Agreement is determined to be or becomes unenforceable or illegal, such provision shall be reformed to the minimum extent necessary in order for this Agreement to remain in effect in accordance with its terms as modified by such reformation.</font></span>
+  </p>
+  <p style=MARGIN:0pt>
+    <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>&nbsp;</font></span>
+  </p>
+  <p style=MARGIN:0pt>
+    <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>TERMS OF SERVICE</font></span>
+  </p>
+  <p style=MARGIN:0pt>
+    <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>&nbsp;</font></span>
+  </p>
+  <p style=MARGIN:0pt>
+    <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>&nbsp;</font></span>
+  </p>
+  <p style=MARGIN:0pt>
+    <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>See also </font></span><span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><a href="PrivacyPolicy.htm" ><font size=2>Privacy Policy</font></a></span>
+  </p>
+  <p style=MARGIN:0pt>
+    <span style="COLOR:#000000; FONT-FAMILY:'Times New Roman'"><font size=2>&nbsp;</font></span>
+  </p>
+</div>
+<br></body>
+</html>
