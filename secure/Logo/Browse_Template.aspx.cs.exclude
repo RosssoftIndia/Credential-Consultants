@@ -1,0 +1,297 @@
+using System;
+using System.Data;
+using System.Configuration;
+using System.Collections;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+using System.IO;
+using System.Xml;
+using DocumentFormat.OpenXml.Packaging;
+using System.Xml.Linq;
+
+
+
+
+public partial class secure_Template_Browse_Template : System.Web.UI.Page
+{
+
+    protected void Page_PreInit(object sender, EventArgs e)
+    {
+        switch (Session["Authenticate"].ToString())
+        {
+            case "Approved":
+                break;
+            default:
+                Response.Redirect("~/Fail.aspx");
+                break;
+        }
+
+    }
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!Page.IsPostBack)
+        {
+
+
+            string folder = Session["Admin_Customer"].ToString();
+        
+          DirectoryInfo dirInfo = new DirectoryInfo(Server.MapPath("~/Assets/Template/" + folder));
+          if (dirInfo.Exists)
+          {
+              drpTemplate();
+          }
+          else
+          {
+              Directory.CreateDirectory(Server.MapPath("~/Assets/Template/" + folder));
+              drpTemplate();
+          }
+        }
+    }
+
+
+    #region Generate Template Dropdown
+    public void drpTemplate()
+    {
+        string folder = Session["Admin_Customer"].ToString();
+
+        DirectoryInfo dirInfo = new DirectoryInfo(Server.MapPath("~/Assets/Template/" + folder));
+        ArrayList list = new ArrayList();
+        list.AddRange(dirInfo.GetFiles("*.dotx"));
+        switch (Session["Admin_Type"].ToString())
+        {
+            case "USER":
+                ClientAdmin.Utility.LoadTemplate(Drptemplate, list);
+                break;
+            case "ADMIN":
+                break;
+            default:
+                Response.Redirect("~/Fail.aspx");
+                break;
+        }
+    }
+
+    #endregion
+
+    #region Onclick
+    protected void btn_Click(object sender, EventArgs e)
+    {
+        lblerror.Text = "";
+        string folder = Session["Admin_Customer"].ToString();
+
+        string check = ClientAdmin.Utility.check_filenumber(txtfileno.Text, folder);
+        if (check == "Access")
+        {
+            int count = ClientAdmin.Utility.EvaluationCount(txtfileno.Text);
+            if (count > 0)
+            {
+                SelectTemplateType(folder, count);
+            }
+            else { lblerror.Text = "* The application file number entered has no Educational record."; }
+        }
+        else { lblerror.Text = "* The application file number entered is invalid. Please check your file number and try again."; }
+
+
+
+
+    }
+
+
+    #endregion
+      
+    #region Select Template
+    public void SelectTemplateType(string folder, int educount)
+    {
+
+        string xmltemplate = "", dotxtemplate = "";
+        string ReportType = Drptemplate.SelectedItem.ToString();
+        string filefolder = Drptemplate.SelectedValue.ToString();
+        string strfile;
+        switch (ReportType)
+        {
+            case "Educational Equivalency":          
+                     if(educount > 5)
+                     {
+                         strfile = "Template"+"5"+".dotx";
+                     }
+                     else 
+                     {
+                         strfile = "Template"+educount+".dotx";
+                     }
+                    
+
+                xmltemplate = Server.MapPath("~/Assets/Template/"+ filefolder +".xml" );
+                dotxtemplate = Server.MapPath("~/Assets/Template/" + folder + "/" + filefolder  + "/" + strfile);
+
+                break;
+        }
+        GenerateReport(xmltemplate, dotxtemplate,educount);
+    }
+
+    #endregion
+
+    #region Generate Report
+
+    public void GenerateReport( string xmltemplate,string dotxtemplate,int educount)
+    {
+
+        string strTemp = Environment.GetEnvironmentVariable("temp");
+        string strFileName = String.Format("{0}\\{1}.dotx", strTemp, Guid.NewGuid().ToString());
+        File.Copy(dotxtemplate, strFileName);
+
+        GetData(xmltemplate,educount);
+        string customXml = File.ReadAllText(Server.MapPath("~/App_Data/datatemp.xml"));
+        ReplaceCustomXML(strFileName, customXml);
+
+        //return it to the client - we know strFile is updated, so return it
+        Response.ClearContent();
+        Response.ClearHeaders();
+        Response.AddHeader("content-disposition", "attachment; filename=" +"1.doc");
+        Response.ContentEncoding = System.Text.Encoding.UTF8;
+        Response.TransmitFile(strFileName);
+        Response.Flush();
+        Response.Close();
+
+        //Delete the temp file
+        File.Delete(strFileName);
+        File.Delete(Server.MapPath("~/App_Data/datatemp.xml"));
+    }
+
+
+    protected void ReplaceCustomXML(string fileName, string customXML)
+    {
+        using (WordprocessingDocument wordDoc = WordprocessingDocument.Open(fileName, true))
+        {
+            MainDocumentPart mainPart = wordDoc.MainDocumentPart;
+
+            mainPart.DeleteParts<CustomXmlPart>(mainPart.CustomXmlParts);
+
+            //Add a new customXML part and then add content
+            CustomXmlPart customXmlPart = mainPart.AddNewPart<CustomXmlPart>();
+
+            //copy the XML into the new part...
+            using (StreamWriter ts = new StreamWriter(customXmlPart.GetStream()))
+                ts.Write(customXML);
+        }
+
+    }
+
+    protected void GetData(string xmlpath,int educount)
+    {
+        File.Copy(xmlpath, Server.MapPath("~/App_Data/datatemp.xml"), true);
+
+        XmlDocument doc = new XmlDocument();
+        doc.Load(Server.MapPath("~/App_Data/datatemp.xml"));
+        DateTime dt = DateTime.Now;
+        int count = doc.DocumentElement.ChildNodes.Count;
+
+        //generate data
+         DataSet Generalinfo = ClientAdmin.Utility.Generaldata(txtfileno.Text);
+         DataSet Eduinfo = ClientAdmin.Utility.Edudata(txtfileno.Text);
+        string[] temp;
+         for (int i = 0; i <= count - 1; i++)
+         {
+             switch (doc.DocumentElement.ChildNodes[i].Name)
+             {
+                 case "currentmonth":
+                     doc.DocumentElement.ChildNodes[i].InnerText = dt.ToString("MMMM");
+                     break;
+                 case "currentdate":
+                     doc.DocumentElement.ChildNodes[i].InnerText = dt.ToString("dd");
+                     break;
+                 case "currentyear":
+                     doc.DocumentElement.ChildNodes[i].InnerText = dt.Year.ToString().Split('/')[0];
+                     break;
+                 case "fileno":
+                     doc.DocumentElement.ChildNodes[i].InnerText = txtfileno.Text;
+                     break;
+                 case "evalpurpose":
+                     doc.DocumentElement.ChildNodes[i].InnerText = ClientAdmin.Utility.Getpurpose(txtfileno.Text);
+                     break;
+                 default:
+                     //general info
+                     if (Generalinfo.Tables[0].Rows.Count > 0)
+                     {
+                         temp = Generalinfo.Tables[0].Rows[0]["DateOfBirth"].ToString().Split('/');
+                         DataTable dts =(DataTable)Generalinfo.Tables[0];
+                         foreach (DataColumn col in dts.Columns)
+                         {
+                             if (col.ColumnName == doc.DocumentElement.ChildNodes[i].Name)
+                             {
+                                 doc.DocumentElement.ChildNodes[i].InnerText = Generalinfo.Tables[0].Rows[0][doc.DocumentElement.ChildNodes[i].Name].ToString();
+                             }
+                         }
+                         if (doc.DocumentElement.ChildNodes[i].Name == "birthdate")
+                         {                             
+                              doc.DocumentElement.ChildNodes[i].InnerText = temp[1].ToString();
+                         }
+                         if (doc.DocumentElement.ChildNodes[i].Name == "birthmonth")
+                         {
+                             doc.DocumentElement.ChildNodes[i].InnerText = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Convert.ToInt32 (temp[0].ToString())); 
+                         }
+                         if (doc.DocumentElement.ChildNodes[i].Name == "birthyear")
+                         {
+                             doc.DocumentElement.ChildNodes[i].InnerText = temp[2].ToString();
+                         }
+
+
+                     } 
+                     //Edu
+                     if (educount > 5) { educount = 5; }
+                     if (Eduinfo.Tables[0].Rows.Count > 0)
+                     {
+                         for (int j = 1; j <= educount; j++)
+                         {
+                             if (doc.DocumentElement.ChildNodes[i].Name == "credential_" + j + "_documents")
+                             {
+                                 doc.DocumentElement.ChildNodes[i].InnerText = "";
+                             }
+                             if (doc.DocumentElement.ChildNodes[i].Name == "credential_" + j + "_program")
+                             {
+                                 doc.DocumentElement.ChildNodes[i].InnerText = ClientAdmin.Utility.GetDescription("degree", Eduinfo.Tables[0].Rows[j-1]["eduid"].ToString(), Session["Admin_Customer"].ToString());
+                             }
+                             if (doc.DocumentElement.ChildNodes[i].Name == "credential_" + j + "_country")
+                             {
+                                 doc.DocumentElement.ChildNodes[i].InnerText = Eduinfo.Tables[0].Rows[j-1]["Country"].ToString();
+                             }
+                             if (doc.DocumentElement.ChildNodes[i].Name == "credential_" + j + "_institution")
+                             {
+                                 doc.DocumentElement.ChildNodes[i].InnerText = Eduinfo.Tables[0].Rows[j-1]["Name"].ToString();
+                             }
+                             if (doc.DocumentElement.ChildNodes[i].Name == "credential_" + j + "_recognition")
+                             {
+                                 doc.DocumentElement.ChildNodes[i].InnerText = ClientAdmin.Utility.GetDescription("Institution", Eduinfo.Tables[0].Rows[j-1]["InsId"].ToString(), Session["Admin_Customer"].ToString());
+                             }
+                             if (doc.DocumentElement.ChildNodes[i].Name == "credential_" + j + "_us")
+                             {
+                                 doc.DocumentElement.ChildNodes[i].InnerText = ClientAdmin.Utility.GetDescription("equi", Eduinfo.Tables[0].Rows[j-1]["Linkage"].ToString(), Session["Admin_Customer"].ToString());
+                             }
+                             if (doc.DocumentElement.ChildNodes[i].Name == "credential_" + j + "_grade")
+                             {
+                                 doc.DocumentElement.ChildNodes[i].InnerText = ClientAdmin.Utility.GetDescription("grade", Eduinfo.Tables[0].Rows[j-1]["Linkage"].ToString(), Session["Admin_Customer"].ToString());
+                             }
+                         }
+                     }
+
+                     break;
+             }
+         }
+
+
+        doc.Save(Server.MapPath("~/App_Data/datatemp.xml"));
+
+    }
+
+    public void Edu()
+    {
+
+    }
+    #endregion
+
+
+}
+

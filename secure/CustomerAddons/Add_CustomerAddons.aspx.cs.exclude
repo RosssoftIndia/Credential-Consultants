@@ -1,0 +1,150 @@
+using System;
+using System.Data;
+using System.Configuration;
+using System.Collections;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+using CKEditor.NET;  
+
+public partial class secure_CustomerAddons_Add_CustomerAddons : System.Web.UI.Page
+{
+
+    protected void Page_PreInit(object sender, EventArgs e)
+    {
+        switch (Session["Authenticate"].ToString())
+        {
+            case "Approved":
+                break;
+            default:
+                Response.Redirect("~/Fail.aspx");
+                break;
+        }
+    }
+
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        CheckBoxList CheckBoxList1 = (CheckBoxList)DetailsView_Country.FindControl("CheckBoxList1");
+        switch (Session["Admin_Type"].ToString())
+        {
+            case "USER":
+             ClientAdmin.Utility.Getcard_type(CheckBoxList1);
+                break;
+            case "ADMIN":               
+                break;
+            default:
+                Response.Redirect("~/Fail.aspx");
+                break;
+        }      
+       
+    }
+
+
+
+    protected void Add_Click(object sender, EventArgs e)
+    {
+        TextBox dlcount = (TextBox)DetailsView_Country.FindControl("dlcopy");
+        CKEditorControl msg1 = (CKEditorControl)DetailsView_Country.FindControl("dlinst");
+        CKEditorControl msg2 = (CKEditorControl)DetailsView_Country.FindControl("edinst");
+        CKEditorControl url = (CKEditorControl)DetailsView_Country.FindControl("url");
+        CKEditorControl toc = (CKEditorControl)DetailsView_Country.FindControl("txt_toc");
+        RadioButtonList option = (RadioButtonList)DetailsView_Country.FindControl("searchoption");
+        RadioButtonList option1 = (RadioButtonList)DetailsView_Country.FindControl("thankuoption");
+        TextBox weburl = (TextBox)DetailsView_Country.FindControl("WebUrl");
+        TextBox logintxt = (TextBox)DetailsView_Country.FindControl("logintextbox");
+        TextBox transkeytxt = (TextBox)DetailsView_Country.FindControl("transkeybox");
+        TextBox mailid = (TextBox)DetailsView_Country.FindControl("mailid");
+        CheckBoxList CheckBoxList1 = (CheckBoxList)DetailsView_Country.FindControl("CheckBoxList1");
+        int credit = 0;
+
+        string hashlogin = "";
+        string hashtranskey = "";
+        string siteurl = "";
+        string temp="";
+        string vartype = "";    
+        if (option.SelectedIndex == 0)
+        {
+            temp = logintxt.Text.Trim();
+            hashlogin = ClientAdmin.Utility.base64Encode(temp);
+            credit = 1;
+            temp = "";
+            temp = transkeytxt.Text.Trim();
+            hashtranskey = ClientAdmin.Utility.base64Encode(temp);           
+        }
+        else
+        {
+            credit = 0;
+            hashlogin = null;
+            hashtranskey = null;            
+        }
+        if (option1.SelectedIndex == 0)
+        {
+            siteurl = weburl.Text;
+        }
+        else
+        {
+            siteurl = null;
+        }
+
+        for (int i = 0; i <= CheckBoxList1.Items.Count - 1; i++)
+        {
+            if (CheckBoxList1.Items[i].Selected)
+            {
+
+                vartype += CheckBoxList1.Items[i].Value + "|";
+            }
+        }
+        vartype = vartype.TrimEnd('|');
+        if (vartype == "")
+        {
+            vartype = null;
+        }
+           bool result = false;
+        switch (Session["Admin_Type"].ToString())
+        {
+            case "USER":
+               result = ClientAdmin.Utility.Grid_CustomerAdonsAdd(Convert.ToInt32(dlcount.Text), msg1.Text , msg2.Text , Convert.ToInt32(Session["Admin_Customer"].ToString()), url.Text , toc.Text.ToString(), credit, hashlogin, hashtranskey, mailid.Text, option1.SelectedValue.ToString(), vartype, siteurl);
+                break;
+            case "ADMIN":
+                break;
+            default:
+                Response.Redirect("~/Fail.aspx");
+                break;
+        }            
+     
+        if (result == true)
+        {
+            Response.Redirect("~/secure/CustomerAddons/Browse_CustomerAddons.aspx");
+        }
+    }
+    protected void searchoption_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        RadioButtonList r = (RadioButtonList)sender;
+        HtmlGenericControl block = (HtmlGenericControl)DetailsView_Country.FindControl("creditinfoblock");
+        if (r.SelectedIndex == 0)
+        {
+            block.Visible = true;
+        }
+        else
+        {
+            block.Visible = false;
+        }
+    }
+    protected void thankuoption_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        RadioButtonList r = (RadioButtonList)sender;
+        HtmlGenericControl block1 = (HtmlGenericControl)DetailsView_Country.FindControl("Thankublock");
+        if (r.SelectedIndex == 0)
+        {
+            block1.Visible = true;
+        }
+        else
+        {
+            block1.Visible = false;
+        }
+    }
+}

@@ -1,0 +1,141 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Add_CustomerAddons.aspx.cs" MasterPageFile="~/secure/Master.master" Inherits="secure_CustomerAddons_Add_CustomerAddons" %>
+
+<%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %>
+<asp:Content ID="Homesubmenu" ContentPlaceHolderID ="Submenu" runat="server">  
+ <span class="title" >Add Settings</span>
+   <div class="submenu_style">            
+            <ul id="submenu">
+            <li class="single"><a href="Browse_CustomerAddons.aspx"><b>Browse Settings</b></a></li>		
+            <li class="single"><a href="Add_CustomerAddons.aspx"><b>Add Settings</b></a></li>		
+		</ul>
+		</div>
+		<br />
+		<br />		
+</asp:Content>
+<asp:Content ID="HomeContent" ContentPlaceHolderID ="Content" runat="server">
+<asp:ScriptManager ID="ScriptManager1" runat="server">
+            </asp:ScriptManager>
+        <asp:UpdatePanel ID="UpdatePanel1" UpdateMode="Conditional"   runat="server">    
+            <ContentTemplate>            
+            <br />
+            <br />
+<asp:DetailsView id="DetailsView_Country" runat="server" DefaultMode="Insert" AutoGenerateRows="False" CssClass="detailview_css"  PagerStyle-CssClass="pgr"   AlternatingRowStyle-CssClass="alt">
+<Fields>
+<asp:TemplateField SortExpression="Delivery_copy" HeaderText="No of Delivery copies"><InsertItemTemplate>
+                    <asp:TextBox ID="dlcopy" runat="server" ></asp:TextBox>
+                
+</InsertItemTemplate>
+</asp:TemplateField>
+<asp:TemplateField SortExpression="Delivery_Instructions" HeaderText="Delivery Instructions"><InsertItemTemplate>
+<CKEditor:CKEditorControl ID="dlinst" runat="server"  Width="600px" Height="300px"  BasePath="~/Code/fckeditor/"></CKEditor:CKEditorControl>
+</InsertItemTemplate>
+</asp:TemplateField>
+<asp:TemplateField SortExpression="Education_Instructions" HeaderText="Education Instructions"><InsertItemTemplate>
+<CKEditor:CKEditorControl ID="edinst" runat="server"  Width="600px" Height="300px"  BasePath="~/Code/fckeditor/" ></CKEditor:CKEditorControl>
+</InsertItemTemplate>
+</asp:TemplateField>
+<asp:TemplateField HeaderText="Document Instructions"><InsertItemTemplate>
+<CKEditor:CKEditorControl ID="url" runat="server"  Width="600px" Height="300px"  BasePath="~/Code/fckeditor/" ></CKEditor:CKEditorControl>
+</InsertItemTemplate>
+</asp:TemplateField>
+<asp:TemplateField HeaderText="Terms And Condition"><InsertItemTemplate>
+    <CKEditor:CKEditorControl ID="txt_toc" runat="server"  Width="600px" Height="300px" BasePath="~/Code/fckeditor/"></CKEditor:CKEditorControl>
+</InsertItemTemplate>
+</asp:TemplateField>
+<asp:TemplateField HeaderText="CreditCard">
+<InsertItemTemplate>
+<br />
+<asp:RadioButtonList ID="searchoption" runat="server" RepeatDirection="Horizontal" 
+        onselectedindexchanged="searchoption_SelectedIndexChanged" AutoPostBack="True">
+        <asp:ListItem Value="1">Enable</asp:ListItem>
+        <asp:ListItem Value="0" Selected="True">Disable</asp:ListItem>        
+    </asp:RadioButtonList>    
+    <br />
+    <div id="creditinfoblock" runat="server" visible="false" >
+        <table style="width: 100%;">
+            <tr>
+                <th style="width: 121px">
+                 Login ID :
+                </th>
+                <td>
+                    <asp:TextBox ID="logintextbox" runat="server" 
+                        Width="200px" MaxLength="50"></asp:TextBox> <sv:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="logintextbox"  ErrorMessage="You must Enter Login ID">*</sv:RequiredFieldValidator>
+                </td>               
+            </tr>
+            <tr>
+                <th style="width: 121px">
+                Transaction Key :
+                </th>
+                <td>
+                  <asp:TextBox ID="transkeybox"  runat="server" Width="300px" 
+                        MaxLength="50"></asp:TextBox> <sv:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="logintextbox"  ErrorMessage="You must Enter Transaction Key">*</sv:RequiredFieldValidator>
+                                      </td>               
+            </tr>
+            <tr>
+                <th style="width: 121px">
+                Email-Id :
+                </th>
+                <td>
+                  <asp:TextBox ID="mailid" runat="server" Width="200px" MaxLength="50"></asp:TextBox> 
+                  <sv:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="mailid"  ErrorMessage="You must Enter Email-Id">*</sv:RequiredFieldValidator>
+                 <sv:RegularExpressionValidator ID="frm1_ExpressionFieldValidator4" runat="server" ControlToValidate="mailid" ErrorMessage="You must enter a valid Email-ID" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></sv:RegularExpressionValidator >
+                </td>               
+            </tr>
+             <tr><th colspan="2" ><br />Note: Any sucessful customer transaction will be mailed to the Above Email-Id</th></tr>                
+        </table>
+    </div>
+    <br />
+</InsertItemTemplate>
+</asp:TemplateField>
+<asp:TemplateField HeaderText="CreditCard Type">
+<InsertItemTemplate>
+  <asp:CheckBoxList ID="CheckBoxList1" runat="server" 
+           RepeatDirection="Horizontal" Width="100%" RepeatColumns="5" 
+           RepeatLayout="Flow">           
+       </asp:CheckBoxList>
+</InsertItemTemplate>
+</asp:TemplateField>
+<asp:TemplateField HeaderText="Thank You &lt;br/&gt;(Example: www.site.com. Do not use 'http'.)">
+<InsertItemTemplate>
+<br />
+<asp:RadioButtonList ID="thankuoption" runat="server" RepeatDirection="Horizontal" 
+        onselectedindexchanged="thankuoption_SelectedIndexChanged" 
+        AutoPostBack="True">
+        <asp:ListItem Value="1">Enable</asp:ListItem>
+        <asp:ListItem Value="0" Selected="True">Disable</asp:ListItem>        
+    </asp:RadioButtonList>   
+    <br />
+    <div id="Thankublock" runat="server" visible="false" >
+        <table style="width: 100%;">
+              <tr>
+                <th style="width: 121px">
+               Website Url
+                </th>
+                <td>
+                  <asp:TextBox ID="WebUrl" runat="server" Width="200px" MaxLength="50"></asp:TextBox>                   
+                </td>               
+            </tr>      
+             <tr><th></th><td>
+              <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
+                        ErrorMessage="You must enter a Url" ControlToValidate="WebUrl"></asp:RequiredFieldValidator><br />
+                   <asp:RegularExpressionValidator ID="urlval" runat="server" ControlToValidate="WebUrl" ErrorMessage="You must enter a valid Url" ValidationExpression="^(((ftp)\://)|www\.)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(:[a-zA-Z0-9]*)?/?([a-zA-Z0-9\-\._\?\,\'/\\\+&%\$#\=~])*$" style="left: 0px"></asp:RegularExpressionValidator>
+            </td></tr>        
+        </table>
+    </div>
+    <br /> 
+</InsertItemTemplate>
+</asp:TemplateField>
+<asp:TemplateField ShowHeader="False"><InsertItemTemplate>
+                    <asp:Button ID="Add" runat="server" CssClass="btncolor" CausesValidation="true" CommandName="" Text="Add" OnClick="Add_Click" />
+                </InsertItemTemplate>
+<ControlStyle Width="100px"></ControlStyle>
+<ItemTemplate>          
+</ItemTemplate>
+</asp:TemplateField>
+</Fields>
+</asp:DetailsView> 
+<br />
+<br />
+</ContentTemplate>       
+         </asp:UpdatePanel>       
+</asp:Content>
