@@ -1,0 +1,202 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Master.master.cs" Inherits="secure_Master" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">     
+<link href="Code/menu/menu.css" rel="stylesheet" type="text/css" /> 
+    <link href="Code/navigation/Navigation.css" rel="stylesheet" type="text/css" /> 
+<script type="text/javascript" src="../Code/Jquery/motionpack.js"></script>
+<link rel="stylesheet" href="../Code/colorbox/colorbox.css" />
+<script src="../Code/colorbox/jquery.min.js"></script>
+<script src="../Code/colorbox/jquery.colorbox.js"></script>
+<script>
+    $(document).ready(function() { $(".vpdf").colorbox({ iframe: true, width: "50%", height: "100%" }); });
+    $(document).ready(function() { $(".iframe").colorbox({ iframe: true, width: "80%", height: "80%" }); });
+ function pageLoad(sender, args) {
+        if (args.get_isPartialLoad()) {
+            $(document).ready(function() { $(".iframe").colorbox({ iframe: true, width: "80%", height: "80%" }); });
+            $(document).ready(function() { $(".vpdf").colorbox({ iframe: true, width: "50%", height: "50%" }); });
+        }
+    }
+</script>
+<script language="javascript" type="text/javascript">
+    $(document).bind('cbox_closed', function() {
+        window.scroll(0, 0);
+        window.location.reload();
+    });
+</script>  
+                <script type="text/javascript">
+                    var _gaq = _gaq || [];
+                    _gaq.push(['_setAccount', 'UA-20673314-1']);
+                    _gaq.push(['_setDomainName', '.credentialconnection.com']);
+                    _gaq.push(['_trackPageview']);
+
+                    (function() {
+                        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                    })();</script>   
+<asp:ContentPlaceHolder ID="header" runat="server">
+		 
+            </asp:ContentPlaceHolder>
+ 
+
+            </head>
+            
+<body>
+    <form id="form1" runat="server">          
+       <div id="wrapper">           
+	<div id="top">
+	 <table style="width:100%;min-height:110px;" >
+  <tr><td><img id="logo" runat="server" alt="logo" visible="false" /><span id="OrgTitle" runat="server" class="clientTitle" visible="false"></span> </td></tr>
+ <tr><td><table style="float:right;vertical-align:bottom;" > 
+ <tr><td id="Subclient" runat="server" class="Subclient">ADMINISTRATION</td></tr>
+ </table></td></tr>
+ <tr><td class="proj_logbox">
+         <asp:LoginView ID="LoginView" runat="Server">
+            <AnonymousTemplate>                   
+                   <asp:LoginStatus ID="LoginStatus" runat="server" LoginText="Sign In!" LogoutPageUrl="~/Logout.aspx" LogoutAction="Redirect" />                                           
+            </AnonymousTemplate>
+            <LoggedInTemplate>
+                Welcome,
+                <asp:LoginName ID="LoginName" runat="Server" /><span style="font-size:12px;font-weight:bold;">|</span>                                                            
+                <asp:LoginStatus ID="LoginStatus" runat="server" LoginText="Sign In!" LogoutPageUrl="~/Logout.aspx" LogoutAction="Redirect"  />
+            </LoggedInTemplate>                                        
+        </asp:LoginView>    
+       </td></tr>
+ </table>
+	</div>		
+      
+	
+	<div class="mainmenu">
+<ul id="adminblk" runat="server" visible="false"  class="ws_css_cb_menu">          
+   <li>&nbsp;&nbsp;&nbsp;</li>
+  <li><a href="/secure/Home.aspx" title="Home">Home</a></li>
+  <li><a href="#" title=""><span>Maintenance</span>
+    <![if gt IE 6]>
+    </a>
+    <![endif]>
+    <!--[if lte IE 6]><table><tr><td><![endif]-->
+    <ul class='ws_css_cb_menum'>    
+<li><a href="/secure/Country/Browse_Country.aspx?search=" title="">Countries</a></li>
+<li><a href="/secure/Documents/Browse_Documents.aspx?search=&t1=0" title="">Documents</a></li>
+<li><a href="/secure/EducationProgram/Browse_DegreePlan.aspx?search=&t1=0&t2=0" title="">Education Program</a></li>
+<li><a href="/secure/Gradescale/Browse_Gradescale.aspx?search=&t1=0" title="">Gradescale</a></li>  
+<li><a href="/secure/Major/Browse_Major.aspx?search=&t1=0&t2=0" title="">Major/Emphasis</a></li>  
+<li><a href="/secure/Institution/Browse_Institution.aspx?search=&t1=0&t2=0&t3=0&t4=0" title="">School/Institution</a></li>  
+<li><a href="/secure/Source/Browse_Source.aspx?search=&t1=0" title="">Source</a></li>                            
+</ul>
+    <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+  </li>
+     <li><a href="#" title=""><span>Client Management</span>
+    <![if gt IE 6]>
+    </a>
+    <![endif]>
+    <!--[if lte IE 6]><table><tr><td><![endif]-->
+    <ul class='ws_css_cb_menum'>
+     <li><a href="/secure/Admin/Client/Browse_Client.aspx" title="">Clients</a></li> 
+    <li><a href="/secure/Admin/Login/Browse_Login.aspx" title="">Client Login</a></li> 
+    <li><a href="/secure/Template/Browse_Template.aspx" title="">Template</a></li> 
+    <li><a href="/secure/Logo/Browse_Logo.aspx" title="">Logo</a></li> 
+<%--	<li><a href="/secure/Admin/Browse_Client.aspx" title="" >Admin &#187; Client</a></li>  --%>                           
+    </ul>
+    <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+  </li>
+</ul>  
+ <ul id="clientblk" runat="server" visible="false" class="ws_css_cb_menu">          
+  <li>&nbsp;&nbsp;&nbsp;</li>
+    <li><a href="/secure/Home.aspx" title="Home">Home</a></li>
+  <li><a href="#" title=""><span>Applications</span>
+    <![if gt IE 6]>
+    </a>
+    <![endif]>
+    <!--[if lte IE 6]><table><tr><td><![endif]-->
+    <ul class='ws_css_cb_menum'>
+      <li><a href="/secure/Active_Application.aspx" title="View all Active Applications">Active Applications</a></li>
+      <li><a href="/secure/Archives_Application.aspx" title="View all Archive Applications">Archive Applications</a></li>
+      <li><a href="/secure/Quickapp/Quickapp.aspx" title="">Quick App</a></li>     
+    </ul>
+    <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+  </li>
+  <li><a href="#" title=""><span>Maintenance</span>
+    <![if gt IE 6]>
+    </a>
+    <![endif]>
+    <!--[if lte IE 6]><table><tr><td><![endif]-->
+    <ul class='ws_css_cb_menum'>   
+<li><a href="/secure/Country/Browse_Country.aspx?search=" title="">Countries</a></li>
+<li><a href="/secure/Documents/Browse_Documents.aspx?search=&t1=0" title="">Documents</a></li>
+<li><a href="/secure/EducationProgram/Browse_DegreePlan.aspx?search=&t1=0&t2=0" title="">Education Program</a></li>
+<li><a href="/secure/Gradescale/Browse_Gradescale.aspx?search=&t1=0" title="">Gradescale</a></li>  
+<li><a href="/secure/Major/Browse_Major.aspx?search=&t1=0&t2=0" title="">Major/Emphasis</a></li>  
+<li><a href="/secure/Institution/Browse_Institution.aspx?search=&t1=0&t2=0&t3=0&t4=0" title="">School/Institution</a></li>  
+<li><a href="/secure/Source/Browse_Source.aspx?search=&t1=0" title="">Source</a></li>
+<li><a href="/secure/UsEquivalency/Browse_Us_Equivalency.aspx?search=" title="">Us Equivalency</a></li>
+    </ul>
+    <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+  </li>
+    <li><a href="#" title=""><span>Settings</span>
+    <![if gt IE 6]>
+    </a>
+    <![endif]>
+    <!--[if lte IE 6]><table><tr><td><![endif]-->
+    <ul class='ws_css_cb_menum'>    
+<li><a href="/secure/CustomerAddons/Browse_CustomerAddons.aspx" title="">Application</a></li>
+<li><a href="/secure/DeliveryType/Browse_DeliveryType.aspx" title="">Delivery</a></li>
+<li><a href="/secure/ServiceType/Browse_ServiceType.aspx" title="">Service</a></li>                            
+<li><a href="/secure/SplashPage/Browse_Splashpage.aspx" title="">Splash Screen</a></li>   
+    </ul>
+    <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+  </li> 
+    <li><a href="#" title=""><span>Client Accounts</span>
+    <![if gt IE 6]>
+    </a>
+    <![endif]>
+    <!--[if lte IE 6]><table><tr><td><![endif]-->
+    <ul class='ws_css_cb_menum'>    
+<li><a href="/secure/ClientAdmin/Client/Browse_Client.aspx" title="">Browse Clients</a></li>
+    <li><a href="/secure/Employee/Browse_Employee.aspx" title="">Employee</a></li>     
+</ul>  
+    <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+  </li>          
+</ul>  
+  </div>  
+  <br />
+  <br />	
+  <br />
+  <br />  
+  
+ <div id="sub">
+ 	<asp:ContentPlaceHolder ID="Submenu" runat="server">
+		 
+            </asp:ContentPlaceHolder>
+            <br />
+	</div>
+	
+	<div id="main">
+		<div id="container">
+		 <asp:ContentPlaceHolder ID="Content" runat="server">
+		 
+            </asp:ContentPlaceHolder>
+</div>
+		
+		<div id="bottom">
+		 <p ID="Msgbox" runat="server"></p>		
+		</div>
+			
+			<div class="clear"></div>
+		
+		</div>
+		
+		<div id="page-bottom">
+		 	<asp:ContentPlaceHolder ID="footer" runat="server">
+		 
+            </asp:ContentPlaceHolder>
+		</div>
+
+	</div>     
+  
+      
+   
+    </form>
+</body>
+</html>

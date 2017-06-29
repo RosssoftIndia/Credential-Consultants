@@ -1,0 +1,95 @@
+using System;
+using System.Data;
+using System.Configuration;
+using System.Collections;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+
+public partial class secure_search_Search_Application : System.Web.UI.Page
+{
+
+    protected void Page_PreInit(object sender, EventArgs e)
+    {
+        switch (Session["Authenticate"].ToString())
+        {
+            case "Approved":
+                break;
+            default:
+                Response.Redirect("~/Fail.aspx");
+                break;
+        }
+
+    }
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+    }
+   
+   
+    protected void searchbtn_Click(object sender, ImageClickEventArgs e)
+    {
+        Session["appltemp"] = searchbox.Text;
+        switch (Session["Admin_Type"].ToString())
+        {
+            case "USER":
+                ClientAdmin.Utility.Grid_SearchApplicant(grid_search, searchbox.Text, Session["Admin_Customer"].ToString(), searchoption.SelectedItem.ToString());
+                break;
+            case "ADMIN":              
+                break;
+            default:
+                Response.Redirect("~/Fail.aspx");
+                break;
+        }   
+        
+    }
+    protected void grid_search_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        grid_search.PageIndex = e.NewPageIndex;
+        switch (Session["Admin_Type"].ToString())
+        {
+            case "USER":
+                ClientAdmin.Utility.Grid_SearchApplicant(grid_search, Session["appltemp"].ToString(), Session["Admin_Customer"].ToString(), searchoption.SelectedItem.ToString());
+                break;
+            case "ADMIN":
+                break;
+            default:
+                Response.Redirect("~/Fail.aspx");
+                break;
+        }   
+        
+    }
+    protected void application_del_Click(object sender, ImageClickEventArgs e)
+    {
+        ImageButton deletebtn = (ImageButton)sender;
+        GridViewRow grdRow = (GridViewRow)deletebtn.Parent.Parent as GridViewRow;
+        Label id_control = (Label)grdRow.FindControl("lblfileno");
+        switch (Session["Admin_Type"].ToString())
+        {
+            case "USER":
+                ClientAdmin.Utility.Remove_Application(id_control.Text, Session["Admin_Customer"].ToString());
+                break;
+            case "ADMIN":
+                break;
+            default:
+                Response.Redirect("~/Fail.aspx");
+                break;
+        }       
+    }
+    protected void grid_search_DataBound(object sender, EventArgs e)
+    {
+        foreach (GridViewRow row in grid_search.Rows)
+        {
+            if (row.RowType == DataControlRowType.DataRow)
+            {
+                ImageButton lnremove = (ImageButton)row.FindControl("btndelete");
+                lnremove.Attributes.Add("onclick", "javascript:return " +
+                "confirm('Are you sure you want to delete this Application?')");
+            }
+        }
+    }
+}

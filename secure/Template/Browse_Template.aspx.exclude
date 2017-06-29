@@ -1,0 +1,53 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Browse_Template.aspx.cs" MasterPageFile="~/secure/Master.master" Inherits="secure_Template_Browse_Template" %>
+<asp:Content ID="Homesubmenu" ContentPlaceHolderID ="Submenu" runat="server">  
+    <span class="title" >Templates</span> 
+  <div class="submenu_style">            
+            <%-- <div class="buttons">   
+    <a href="UploadTemplate.aspx" class="regular">
+        <img src="../Code/icons/irc-join.ico" alt=""/> 
+        <b>Upload Template</b>
+    </a>  
+</div>          --%>
+		</div>
+		<br />
+		<br />		
+</asp:Content>
+<asp:Content ID="HomeContent" ContentPlaceHolderID ="Content" runat="server">
+            <br />
+            <br />          
+                <table class="search_css">
+                 <tr>
+                        <td style="width:150px;">
+                           File Number
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtfileno" runat="server" Width="100px"></asp:TextBox>                                                                                   
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                                ControlToValidate="txtfileno" EnableTheming="True" 
+                                ErrorMessage="Enter a File Number"></asp:RequiredFieldValidator>
+                        </td>
+                        </tr> 
+                    <tr>
+                        <td style="width:150px;">
+                           Select Report
+                        </td>
+                        <td>                           
+                            <asp:DropDownList ID="Drptemplate" runat="server" AppendDataBoundItems="True">
+                            </asp:DropDownList>                                                                                   
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                                ControlToValidate="Drptemplate" EnableTheming="True" 
+                                ErrorMessage="Select a Report" InitialValue="0"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+<asp:Button ID="btn" runat="server" Text="Generate Report" 
+        CssClass="btncolor" onclick="btn_Click" />
+                            <asp:Label ID="lblerror" runat="server" ForeColor="Red"></asp:Label>
+                        </td>                        
+                    </tr>                 
+                </table>
+               
+<br />
+<br />       
+</asp:Content>
