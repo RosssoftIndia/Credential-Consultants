@@ -1,0 +1,87 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Master.master.cs" Inherits="Master" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">         
+    <link href="Code/menu/menu.css" rel="stylesheet" type="text/css" />     
+                <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20673314-1']);
+  _gaq.push(['_setDomainName', '.credentialconnection.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script> 
+<link href="Code/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+<script src="scripts/jquery-1.6.2.min.js"></script>
+<script src="scripts/jquery.ui.core.js"></script>
+<script src="scripts/jquery.ui.widget.js"></script>
+<script src="scripts/jquery.ui.accordion.js"></script>
+<script>
+    $(function() {
+        $("#accordion").accordion();
+    });
+	</script> 
+<script language="javascript" type="text/javascript">
+
+    function checkJavaScriptValidity() {
+        document.getElementById("jsDisabled").style.display = 'none';
+        }
+
+    </script>      
+<script type="text/javascript" src="https://www.google.com/recaptcha/api.js" ></script>
+        </head>
+<body onload="checkJavaScriptValidity()">
+    <form id="form1" runat="server">          
+       <div id="wrapper" style="height:900px;">           
+	<div id="top">
+		     <asp:ContentPlaceHolder ID="Header" runat="server">
+		 
+            </asp:ContentPlaceHolder>       
+	</div>			
+  
+  
+ <div id="sub">
+ 	<asp:ContentPlaceHolder ID="Submenu" runat="server">
+		 
+            </asp:ContentPlaceHolder>
+            <br />
+	</div>
+	
+	<div id="main">
+		<div id="container">
+		<div id="jsDisabled"  class="alert" >
+
+JavaScript is disabled in your browser [Please follow Instructions below to Enable It before you start an Application]
+
+</div>
+		 <asp:ContentPlaceHolder ID="Content" runat="server">
+		 
+            </asp:ContentPlaceHolder>
+</div>
+		
+		<div id="bottom">
+		 <p style="color:Red;"  ID="Msgbox" runat="server"></p>		
+		</div>
+			
+			<div class="clear"></div>
+		
+		</div>
+		
+		<div id="page-bottom">
+		 	<asp:ContentPlaceHolder ID="footer" runat="server">
+		 
+            </asp:ContentPlaceHolder>
+		</div>
+
+	</div>     
+  
+      
+   
+    </form>
+</body>
+</html>

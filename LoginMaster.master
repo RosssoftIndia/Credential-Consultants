@@ -1,0 +1,70 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="LoginMaster.master.cs" Inherits="LoginMaster" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">     
+    <link href="Code/menu/menu.css" rel="stylesheet" type="text/css" />  
+     <asp:ContentPlaceHolder ID="pageHeader" runat="server">
+		 
+            </asp:ContentPlaceHolder>      
+                        <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20673314-1']);
+  _gaq.push(['_setDomainName', '.credentialconnection.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>       
+        </head>
+<body>
+    <form id="form1" runat="server">          
+       <div id="wrapper">           
+	<div id="top">
+		          <asp:ContentPlaceHolder ID="Header" runat="server">
+		 
+            </asp:ContentPlaceHolder>  
+	</div>			
+  <br />
+  <br />	
+  <br />
+  <br />  
+  
+ <div id="sub">
+ 	<asp:ContentPlaceHolder ID="Submenu" runat="server">
+		 
+            </asp:ContentPlaceHolder>
+            <br />
+	</div>
+	
+	<div id="main">
+		<div id="container">
+		 <asp:ContentPlaceHolder ID="Content" runat="server">
+		 
+            </asp:ContentPlaceHolder>
+</div>
+		
+		<div id="bottom">
+		 <p ID="Msgbox" runat="server"></p>		
+		</div>
+			
+			<div class="clear"></div>
+		
+		</div>
+		
+		<div id="page-bottom">
+		 	<asp:ContentPlaceHolder ID="footer" runat="server">
+		 
+            </asp:ContentPlaceHolder>
+		</div>
+
+	</div>     
+  
+      
+   
+    </form>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="AppMaster.master.cs" Inherits="AppMaster" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">         
+    <link href="Code/menu/menu.css" rel="stylesheet" type="text/css" />
+       <asp:ContentPlaceHolder ID="pageHeader" runat="server">
+		 
+            </asp:ContentPlaceHolder> 
+               
+            <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20673314-1']);
+  _gaq.push(['_setDomainName', '.credentialconnection.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>     
+  <!-- YUI CSS -->
+	<link rel="stylesheet" type="text/css" href="scripts/build/container/assets/container.css"/>
+	<link rel="stylesheet" type="text/css" href="scripts/build/menu/assets/skins/sam/menu.css"/>
+
+	<!-- YUI Dependencies -->
+	
+	<script type="text/javascript" src="scripts/build/utilities/utilities.js" ></script> 
+	<script type="text/javascript" src="scripts/build/container/container-min.js"></script>
+    <script type="text/javascript">
+
+
+        function addLoadEvent(func) {
+            var oldonload = window.onload;
+            if (typeof window.onload != 'function') {
+                window.onload = func;
+            } else {
+                window.onload = function() {
+                    if (oldonload) {
+                        oldonload();
+                    }
+                    func();
+                }
+            }
+        }
+
+        function pageLoad() {
+            InitDialogs();
+            Loading(false);
+
+        }
+
+
+        function UpdateImg(ctrl, imgsrc) {
+            var img = document.getElementById(ctrl);
+            img.src = imgsrc;
+        }
+
+
+
+        // sets up all of the YUI dialog boxes
+        function InitDialogs() {
+
+            DialogBox_Loading = new YAHOO.widget.Panel("waitBox", { fixedcenter: true, modal: true, visible: true, width: "230px", close: false, draggable: true });
+            DialogBox_Loading.setHeader("Processing, please wait...");
+            DialogBox_Loading.setBody('<div style="text-align:center;"><img src="images/Wait.gif" id="Image1" /></div>');
+            DialogBox_Loading.render(document.body);
+        }
+
+        function Loading(b) {
+
+            if (b == true) {
+
+                DialogBox_Loading.show();
+
+            }
+            else {
+                DialogBox_Loading.hide();
+            }
+        }
+
+//        addLoadEvent(function() {
+//            pageLoad();
+//        })
+
+    </script>    
+        </head>
+ 
+<body>
+    <form id="form1" runat="server">          
+       <div id="wrapper">           
+	<div id="top">
+		     <asp:ContentPlaceHolder ID="Header" runat="server">
+		 
+            </asp:ContentPlaceHolder>       
+	</div>			
+	<div id="main">
+ <div id="sub">
+ 	<asp:ContentPlaceHolder ID="Submenu" runat="server">
+		 
+            </asp:ContentPlaceHolder>
+          
+	</div>
+		<div id="container">
+		 <asp:ContentPlaceHolder ID="Content" runat="server">
+		 
+            </asp:ContentPlaceHolder>
+</div>
+		
+		<div id="bottom">
+		 <p style="color:Red;"  ID="Msgbox" runat="server"></p>		
+		</div>
+			
+			<div class="clear"></div>
+		
+		</div>
+		
+		<div id="page-bottom">
+		 	<asp:ContentPlaceHolder ID="footer" runat="server">
+		 
+            </asp:ContentPlaceHolder>
+		</div>
+
+	</div>     
+  
+      
+   
+    </form>
+</body>
+</html>
